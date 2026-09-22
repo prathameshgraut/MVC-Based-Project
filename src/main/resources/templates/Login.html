@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"  content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+        }
+
+        /* ================= LOGIN BOX ================= */
+
+        .login-container {
+            width: 380px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.20);
+        }
+
+        /* ================= TITLE ================= */
+
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #111827;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #374151;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            border-color: #4f46e5;
+            box-shadow:
+                0 0 0 3px rgba(79, 70, 229, 0.10);
+        }
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-btn {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #4338ca;
+        }
+
+        /* ================= DEMO INFORMATION ================= */
+
+        .demo-info {
+            margin-top: 25px;
+            padding: 12px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .demo-info strong {
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+    <!-- ================= LOGIN CONTAINER ================= -->
+
+    <div class="login-container">
+        <h1>Welcome Back</h1>
+        <p class="subtitle"> Login to your account </p>
+		
+        <!-- ================= LOGIN FORM ================= -->
+        <form action="/Login" method="post">
+            <!-- USERNAME -->
+            <div class="form-group">
+                <label for="username">Username</label>
+
+                <input type="text" id="username" name="Username"  placeholder="Enter username" required>
+            </div>
+            <!-- PASSWORD -->
+            <div class="form-group">
+
+                <label for="password"> Password </label>
+
+                <input type="password"  id="password"  name="Password"  placeholder="Enter password"  required>
+            </div>
+            <!-- LOGIN BUTTON -->
+            <button type="submit"class="login-btn">Login</button>
+        </form>
+    </div>
+</body>
+</html>

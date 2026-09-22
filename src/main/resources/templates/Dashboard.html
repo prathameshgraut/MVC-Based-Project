@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>User Dashboard</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #1e293b;
+        }
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+
+            width: 240px;
+            height: 100vh;
+
+            background: linear-gradient(
+                180deg,
+                #111827,
+                #312e81
+            );
+
+            padding: 25px 18px;
+            color: white;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+
+            margin-bottom: 45px;
+        }
+
+        .logo span {
+            color: #a5b4fc;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            text-decoration: none;
+            color: #e0e7ff;
+
+            padding: 14px 16px;
+            margin-bottom: 8px;
+
+            border-radius: 8px;
+
+            transition: 0.3s;
+        }
+
+        .menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+
+            transform: translateX(4px);
+        }
+
+        .menu .active {
+            background: #6366f1;
+            color: white;
+        }
+
+        /* ================= MAIN ================= */
+
+        .main {
+            margin-left: 240px;
+            min-height: 100vh;
+        }
+
+        /* ================= TOPBAR ================= */
+
+        .topbar {
+            height: 75px;
+
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 35px;
+
+            box-shadow:
+                0 2px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        .topbar h2 {
+            font-size: 22px;
+            color: #111827;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: #6366f1;
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .user-info p:first-child {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .user-info p:last-child {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        /* ================= LOGOUT ================= */
+
+        .logout-btn {
+            margin-left: 20px;
+
+            padding: 9px 17px;
+
+            border: none;
+            border-radius: 6px;
+
+            background: #ef4444;
+            color: white;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* ================= CONTENT ================= */
+
+        .content {
+            padding: 35px;
+        }
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+
+            color: white;
+
+            padding: 32px;
+
+            border-radius: 15px;
+
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 8px 20px rgba(79, 70, 229, 0.25);
+        }
+
+        .welcome h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #ede9fe;
+            font-size: 14px;
+        }
+
+        /* ================= CARDS ================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 22px;
+
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+
+            padding: 28px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.06);
+
+            transition: 0.3s;
+
+            text-align: center;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.10);
+        }
+
+        .card-icon {
+            width: 55px;
+            height: 55px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #eef2ff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #64748b;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 18px;
+        }
+
+        .card a {
+            display: inline-block;
+
+            padding: 9px 18px;
+
+            background: #4f46e5;
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+        .card a:hover {
+            background: #4338ca;
+        }
+
+        /* ================= PROFILE ================= */
+
+        .profile-box {
+            background: white;
+
+            padding: 28px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        .profile-box h2 {
+            margin-bottom: 22px;
+            font-size: 20px;
+        }
+
+        .profile-row {
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+        }
+
+        .profile-item {
+            background: #f8fafc;
+
+            padding: 16px;
+
+            border-radius: 8px;
+
+            border: 1px solid #e2e8f0;
+        }
+
+        .profile-item label {
+            display: block;
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-bottom: 6px;
+        }
+
+        .profile-item p {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 900px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media(max-width: 650px) {
+
+            .sidebar {
+                width: 70px;
+                padding: 20px 10px;
+            }
+
+            .logo {
+                font-size: 0;
+            }
+
+            .logo span {
+                font-size: 20px;
+            }
+
+            .menu a span {
+                display: none;
+            }
+
+            .main {
+                margin-left: 70px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .topbar {
+                padding: 0 15px;
+            }
+
+            .user-info {
+                display: none;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-row {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            My<span>Dashboard</span>
+        </div>
+
+        <div class="menu">
+
+            <a href="#" class="active">
+                🏠
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/profile">
+                👤
+                <span>My Profile</span>
+            </a>
+
+            <a href="/settings">
+                ⚙️
+                <span>Settings</span>
+            </a>
+
+            <a href="/help">
+                ❓
+                <span>Help</span>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="main">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <h2>
+                User Dashboard
+            </h2>
+
+            <div class="user-section">
+
+                <div class="user-icon">
+                    A
+                </div>
+
+                <div class="user-info">
+
+                    <p>
+                        Admin
+                    </p>
+
+                    <p>
+                        User
+                    </p>
+
+                </div>
+
+                <button
+                    class="logout-btn"
+                    onclick="logout()">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <div class="content">
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome">
+
+                <h1>
+                    Welcome Back! 👋
+                </h1>
+
+                <p>
+                    Good to see you again.
+                    Manage your account from here.
+                </p>
+
+            </div>
+
+
+            <!-- ================= CARDS ================= -->
+
+            <div class="cards">
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        My Profile
+                    </h3>
+
+                    <p>
+                        View and update your
+                        personal information.
+                    </p>
+
+                    <a href="/profile">
+                        View Profile
+                    </a>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        ⚙️
+                    </div>
+
+                    <h3>
+                        Account Settings
+                    </h3>
+
+                    <p>
+                        Manage your account
+                        settings and preferences.
+                    </p>
+
+                    <a href="/setting">
+                        setting
+                    </a>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        🔒
+                    </div>
+
+                    <h3>
+                        Security
+                    </h3>
+
+                    <p>
+                        Change your password
+                        and manage security.
+                    </p>
+
+                    <a href="/security">
+                        Security
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ACCOUNT INFORMATION ================= -->
+
+            <div class="profile-box">
+
+                <h2>
+                    Account Information
+                </h2>
+
+                <div class="profile-row">
+
+
+                    <div class="profile-item">
+
+                        <label>
+                            USERNAME
+                        </label>
+
+                        <p>
+                            Admin
+                        </p>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <label>
+                            EMAIL
+                        </label>
+
+                        <p>
+                            admin@example.com
+                        </p>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <label>
+                            ACCOUNT TYPE
+                        </label>
+
+                        <p>
+                            Regular User
+                        </p>
+
+                    </div>
+
+
+                    <div class="profile-item">
+
+                        <label>
+                            ACCOUNT STATUS
+                        </label>
+
+                        <p>
+                            Active
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= LOGOUT SCRIPT ================= -->
+
+    <script>
+
+        function logout() {
+
+            let confirmLogout =
+                confirm(
+                    "Are you sure you want to logout?"
+                );
+
+            if (confirmLogout) {
+
+                window.location.href =
+                    "/Logout";
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
